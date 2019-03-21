@@ -1,16 +1,22 @@
 import React, { Component } from "react";
 import Media from "./component/Media";
+import Search from "./component/Search";
 import { connect } from "react-redux";
-import { getMediaContents } from "./actions/mediaActions";
+import {
+  getMediaContents,
+  searchMediaContents,
+  resetMediaContents
+} from "./actions/mediaActions";
 import "bootstrap/dist/css/bootstrap.min.css";
 import "./index.css";
 
 class App extends Component {
-  state = {
-    page: this.props.media["page-num-requested"]
-  };
   constructor(props) {
     super(props);
+    this.state = {
+      page: this.props.media["page-num-requested"],
+      isSearching: false
+    };
   }
 
   componentDidMount() {
@@ -24,14 +30,14 @@ class App extends Component {
     const lastMediaItem = document.querySelector(
       "div.media-list > .media-item:last-child"
     );
-    if (lastMediaItem && lastMediaItem.offsetTop) {
+    if (lastMediaItem && lastMediaItem.offsetTop && !this.state.isSearching) {
       const lastMediaItemOffset =
         lastMediaItem.offsetTop + lastMediaItem.clientHeight;
       const pageOffset = window.pageYOffset + window.innerHeight;
       var bottomOffset = 2;
       if (
         pageOffset > lastMediaItemOffset - bottomOffset &&
-        this.state.page <= this.props.media.maxPageNumber
+        this.state.page < this.props.media.maxPageNumber
       ) {
         this.loadMore();
       }
@@ -52,6 +58,23 @@ class App extends Component {
     });
   };
 
+  setSearchState = searchState => {
+    this.setState(
+      {
+        isSearching: searchState
+      },
+      () => {
+        if (!this.state.isSearching) {
+          this.props.resetMediaData();
+        }
+      }
+    );
+  };
+
+  searchMedia = queryItem => {
+    this.props.searchMediaContents(queryItem);
+  };
+
   render() {
     const mediaItems = this.props.media["content-items"].content;
     const mediaContents = mediaItems.map((mediaDetails, index) => (
@@ -59,7 +82,12 @@ class App extends Component {
     ));
 
     return (
-      <div className="container-fluid">
+      <div className="container-fluid app-container">
+        <Search
+          isSearching={this.state.isSearching}
+          setSearchState={this.setSearchState}
+          searchMedia={this.searchMedia}
+        />
         <div className="row media-list">{mediaContents}</div>
       </div>
     );
@@ -77,6 +105,12 @@ const mapDispatchToProps = dispatch => {
   return {
     getMedia: pageNumber => {
       dispatch(getMediaContents(pageNumber));
+    },
+    searchMediaContents: searchQuery => {
+      dispatch(searchMediaContents(searchQuery));
+    },
+    resetMediaData: () => {
+      dispatch(resetMediaContents());
     }
   };
 };

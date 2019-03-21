@@ -6,7 +6,7 @@ body {
     sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
-  background: black;
+  background-color: black;
 }
 
 code {
@@ -24,4 +24,34 @@ img.media-image {
 
 .media-details-text {
   color: #fff;
+}
+
+.app-container {
+  background: #000;
+}
+.search-box {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 60px;
+}
+input.form-control.search-input {
+  padding: 2px 40px;
+  background: black;
+  color: white;
+  border: 0px;
+}
+.back-btn {
+  position: absolute;
+  left: 14px;
+}
+.search-data-btn {
+  position: absolute;
+  right: 14px;
+}
+.search-btn {
+  float: right;
+}
+.search-img {
+  width: 20px;
 }

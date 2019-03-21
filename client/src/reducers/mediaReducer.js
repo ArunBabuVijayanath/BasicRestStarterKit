@@ -42,6 +42,12 @@ export default (state = initialState, action) => {
             ...state["content-items"].content,
             ...action.payload.page["content-items"].content
           ]
+        },
+        contentItemsBackUp: {
+          content: [
+            ...state["content-items"].content,
+            ...action.payload.page["content-items"].content
+          ]
         }
       };
       break;
@@ -50,6 +56,16 @@ export default (state = initialState, action) => {
       state = {
         ...state,
         isLoading: false
+      };
+      break;
+
+    case "SEARCH_RESULT_SUCCESS":
+      state = {
+        ...state,
+        "content-items": {
+          ...state["content-items"],
+          content: [...action.payload]
+        }
       };
       break;
   }

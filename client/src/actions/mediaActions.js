@@ -2,6 +2,9 @@ export const FETCH_MEDIA_BEGIN = "FETCH_MEDIA_BEGIN";
 export const FETCH_MEDIA_SUCCESS = "FETCH_MEDIA_SUCCESS";
 export const FETCH_MEDIA_FAILURE = "FETCH_MEDIA_FAILURE";
 
+export const SEARCH_MEDIA = "SEARCH_MEDIA";
+export const SEARCH_RESULT_SUCCESS = "SEARCH_RESULT_SUCCESS";
+
 export const fetchProductsBegin = () => ({
   type: FETCH_MEDIA_BEGIN
 });
@@ -16,6 +19,16 @@ export const fetchProductsFailure = error => ({
   payload: error
 });
 
+export const searchMediaSuccess = mediaItems => ({
+  type: SEARCH_RESULT_SUCCESS,
+  payload: mediaItems
+});
+
+export const resetMediaData = mediaItems => ({
+  type: SEARCH_RESULT_SUCCESS,
+  payload: mediaItems
+});
+
 export function getMediaContents(pageNumber) {
   return dispatch => {
     dispatch(fetchProductsBegin());
@@ -26,6 +39,35 @@ export function getMediaContents(pageNumber) {
         dispatch(fetchProductsSuccess(json));
       })
       .catch(error => dispatch(fetchProductsFailure(error)));
+  };
+}
+
+export function searchMediaContents(searchQuery) {
+  return (dispatch, getState) => {
+    let alreadyLoadedMediaItems = getState().mediaReducer.contentItemsBackUp
+      .content;
+    let hasContentInCache = alreadyLoadedMediaItems.filter(mediaData =>
+      mediaData.name.toLowerCase().includes(searchQuery.toLowerCase())
+    );
+
+    if (hasContentInCache && hasContentInCache.length && false) {
+      dispatch(searchMediaSuccess(hasContentInCache));
+    } else {
+      return fetch("http://localhost:5000/searchpost/?search=" + searchQuery)
+        .then(handleErrors)
+        .then(res => res.json())
+        .then(json => {
+          dispatch(searchMediaSuccess(json));
+        })
+        .catch(error => dispatch(fetchProductsFailure(error)));
+    }
+  };
+}
+
+export function resetMediaContents() {
+  return (dispatch, getState) => {
+    const mediaData = getState().mediaReducer.contentItemsBackUp.content;
+    dispatch(resetMediaData(mediaData));
   };
 }
 
