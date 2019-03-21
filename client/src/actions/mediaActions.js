@@ -50,7 +50,7 @@ export function searchMediaContents(searchQuery) {
       mediaData.name.toLowerCase().includes(searchQuery.toLowerCase())
     );
 
-    if (hasContentInCache && hasContentInCache.length && false) {
+    if (hasContentInCache && hasContentInCache.length) {
       dispatch(searchMediaSuccess(hasContentInCache));
     } else {
       return fetch("http://localhost:5000/searchpost/?search=" + searchQuery)

@@ -33,17 +33,6 @@ conn.once("open", function() {
   });
   require("./app/routes/media-post.routes.js")(app);
   app.listen(5000, () => {
-    console.log("Server is listening on port 5000");
+    console.log("Server is running on port 5000");
   });
 });
-
-// // Connecting to the database
-// mongoose
-//   .connect(dbConfig.url, { useNewUrlParser: true })
-//   .then(() => {
-//     console.log("Successfully connected to the database");
-//   })
-//   .catch(err => {
-//     console.log("Could not connect to the database. Exiting now...", err);
-//     process.exit();
-//   });
