@@ -37,7 +37,7 @@ class SearchInput extends Component {
           className="form-control search-input"
         />
 
-        <a className="search-data-btn" href="" onClick={this.searchMedia}>
+        <a className="search-data-btn" onClick={this.searchMedia}>
           <img
             className="search-img"
             src={process.env.PUBLIC_URL + "/images/search.png"}
