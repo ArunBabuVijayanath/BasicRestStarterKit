@@ -3,14 +3,12 @@
 import { createStore, combineReducers, applyMiddleware } from "redux";
 import { createLogger } from "redux-logger";
 import mediaReducer from "./reducers/mediaReducer";
-import userReducer from "./reducers/userReducer";
 import thunk from "redux-thunk";
 import promise from "redux-promise-middleware";
 
 export default createStore(
   combineReducers({
-    mediaReducer,
-    userReducer
+    mediaReducer
   }),
   {},
   applyMiddleware(createLogger(), thunk, promise)

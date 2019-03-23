@@ -77,9 +77,22 @@ class App extends Component {
 
   render() {
     const mediaItems = this.props.media["content-items"].content;
-    const mediaContents = mediaItems.map((mediaDetails, index) => (
-      <Media key={index} mediaDetails={mediaDetails} />
-    ));
+    let mediaContents = (
+      <div className="col text-center">
+        <p className="no-img-found">Loading</p>
+      </div>
+    );
+    if (mediaItems.length) {
+      mediaContents = mediaItems.map((mediaDetails, index) => (
+        <Media key={index} mediaDetails={mediaDetails} />
+      ));
+    } else if (this.state.isSearching) {
+      mediaContents = (
+        <div className="col text-center">
+          <p className="no-img-found">Nothing Here</p>
+        </div>
+      );
+    }
 
     return (
       <div className="container-fluid app-container">

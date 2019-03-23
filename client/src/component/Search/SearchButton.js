@@ -7,7 +7,7 @@ class SearchButton extends Component {
   render() {
     return (
       <div className="col search-box">
-        <a className="search-btn" onClick={this.setSearchState}>
+        <a className="search-btn" href="#" onClick={this.setSearchState}>
           <img
             className="search-img"
             src={process.env.PUBLIC_URL + "/images/search.png"}

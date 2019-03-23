@@ -1,3 +1,4 @@
+import appConfig from "../config/app.config";
 export const FETCH_MEDIA_BEGIN = "FETCH_MEDIA_BEGIN";
 export const FETCH_MEDIA_SUCCESS = "FETCH_MEDIA_SUCCESS";
 export const FETCH_MEDIA_FAILURE = "FETCH_MEDIA_FAILURE";
@@ -32,7 +33,7 @@ export const resetMediaData = mediaItems => ({
 export function getMediaContents(pageNumber) {
   return dispatch => {
     dispatch(fetchProductsBegin());
-    return fetch("http://localhost:5000/posts/" + pageNumber)
+    return fetch(`${appConfig.baseURL}/posts/${pageNumber}`)
       .then(handleErrors)
       .then(res => res.json())
       .then(json => {
@@ -53,7 +54,7 @@ export function searchMediaContents(searchQuery) {
     if (hasContentInCache && hasContentInCache.length) {
       dispatch(searchMediaSuccess(hasContentInCache));
     } else {
-      return fetch("http://localhost:5000/searchpost/?search=" + searchQuery)
+      return fetch(`${appConfig.baseURL}/searchpost/?search="${searchQuery}`)
         .then(handleErrors)
         .then(res => res.json())
         .then(json => {

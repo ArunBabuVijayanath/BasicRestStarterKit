@@ -27,12 +27,11 @@ conn.on("error", console.error.bind(console, "connection error:"));
 conn.once("open", function() {
   app.get("/", (req, res) => {
     res.json({
-      message:
-        "Welcome to EasyNotes application. Take notes quickly. Organize and keep track of all your notes."
+      message: "Welcome to Diagonal test code base."
     });
   });
   require("./app/routes/media-post.routes.js")(app);
   app.listen(5000, () => {
-    console.log("Server is running on port 5000");
+    console.log("Diagonal test server is running on port 5000");
   });
 });

@@ -6,7 +6,7 @@ body {
     sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
-  background-color: black;
+  background-color: black !important;
 }
 
 code {
@@ -24,6 +24,9 @@ img.media-image {
 
 .media-details-text {
   color: #fff;
+  text-align: left;
+  font-size: 12px;
+  margin: 8px 0;
 }
 
 .app-container {
@@ -54,4 +57,9 @@ input.form-control.search-input {
 }
 .search-img {
   width: 20px;
+}
+.no-img-found {
+  color: #fff;
+  font-weight: bold;
+  font-size: 18px;
 }
