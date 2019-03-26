@@ -10,7 +10,7 @@ The get API up and running do the following.
 
 _Setup Client_
 
-Make sure that client is up and running before you run client
+Make sure that server is up and running before you run client
 
 - `cd client`
 - `npm start`
