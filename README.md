@@ -1,4 +1,4 @@
-# Basic Rest App Starter KIT
+# Basic Rest App Starter KIT with React Node
 
 _Setup API_
 
