@@ -1,4 +1,4 @@
-# Diagonal Code Test
+# Basic Rest App Starter KIT
 
 _Setup API_
 
